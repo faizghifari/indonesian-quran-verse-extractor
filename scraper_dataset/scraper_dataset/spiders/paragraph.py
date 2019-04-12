@@ -69,8 +69,8 @@ class ParagraphSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
-        def extract_with_css(query):
-            return response.css(query).extract_first()
+        # def extract_with_css(query):
+        #     return response.css(query).extract_first()
 
         # follow links to product pages
         for href in response.css('div.txt_subkanal.txt_index h2 a::attr(href)'):
@@ -81,8 +81,8 @@ class ParagraphSpider(scrapy.Spider):
         #     yield response.follow(href, self.parse)
 
     def parse_product(self, response):
-        def extract_with_css(query):
-            return response.css(query).extract_first()
+        # def extract_with_css(query):
+        #     return response.css(query).extract_first()
 
         yield {
             'content': response.css('div.artikel p::text').extract(),
