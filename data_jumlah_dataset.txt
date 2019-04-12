@@ -1,4 +1,4 @@
 DATASET
 
-Tema ISLAM : 4169 Dataset
-Tema UMUM : 7326 Dataset
+Tema ISLAM : 4169 Dataset (36.27%)
+Tema UMUM : 7326 Dataset (63.73%)
