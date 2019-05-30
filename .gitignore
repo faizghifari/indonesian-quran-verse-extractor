@@ -2,5 +2,5 @@
 .vscode
 *glove*
 __pycache__
-
+app/pkl
 txt_dataset
