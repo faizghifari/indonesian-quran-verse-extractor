@@ -11,7 +11,11 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-# @app.rout('results')
+@app.route('/main')
+def main():
+    return render_template('main.html')
+
+# @app.route('results')
 # def results():
 #     model = pickle.load('wordsim.pkl')
 
