@@ -2,3 +2,5 @@
 .vscode
 *glove*
 __pycache__
+
+txt_dataset
