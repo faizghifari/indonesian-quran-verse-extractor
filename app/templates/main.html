@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    
+    <title>Quran Verse Extractor - Home</title>
+    <style>
+      html, body {
+        height: 100%;
+        background-color: #333333
+      }
+
+      body {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+      }
+
+      .form-signin {
+        width: 100%;
+        max-width: 750px;
+        padding: 15px;
+        margin: auto;
+      }
+
+      .form-label-group {
+        position: relative;
+        margin-bottom: 1rem;
+      }
+    
+      h1, p, label {
+        color: azure
+      }
+    </style>
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <body>
+
+    <form action="/results" method="POST" class="form-signin">
+
+      <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-normal">Input the text</h1>
+        <p class="lead">
+          The input text must be in Indonesian. Suggested to use standard indonesian grammar.
+        </p>
+      </div>
+      
+      <div class="form-label-group">
+        <!-- <label for="input-text">Input Text:</label> -->
+        <textarea class="form-control" rows="10" id="input-text" placeholder="Input text here..." required autofocus></textarea>
+      </div>
+
+      <div class="text-center mb-4">
+          <button class="btn btn-lg btn-secondary" type="submit">Submit</button>
+      </div>
+
+      <p class="mt-5 mb-3 text-muted text-center">
+        Final project of IF4092 Tugas Akhir II, created by
+        <a href="https://hzntrm.wordpress.com">Faiz G. Haznitrama</a>
+      </p>
+
+    </form>
+
+    
+
+  </body>
+</html>
