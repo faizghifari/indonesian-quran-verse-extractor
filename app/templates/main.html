@@ -43,33 +43,30 @@
 
   <body>
 
-    <form action="/results" method="POST" class="form-signin">
+      <form action="/results" method="POST" class="form-signin">
 
-      <div class="text-center mb-4">
-        <h1 class="h3 mb-3 font-weight-normal">Input the text</h1>
-        <p class="lead">
-          The input text must be in Indonesian. Suggested to use standard indonesian grammar, 
-          don't be too short (approx. more than 100 word), and minimalize the use of unnecessary symbols.
+        <div class="text-center mb-4">
+          <h1 class="h3 mb-3 font-weight-normal">Input the text</h1>
+          <p class="lead">
+            The input text must be in Indonesian. Suggested to use standard indonesian grammar, 
+            don't be too short (approx. more than 100 word), and minimalize the use of unnecessary symbols.
+          </p>
+        </div>
+        
+        <div class="form-label-group">
+          <textarea class="form-control" rows="10" id="input-text" name="input-text" placeholder="Input text here..." required autofocus></textarea>
+        </div>
+
+        <div class="text-center mb-4">
+            <button class="btn btn-lg btn-secondary" type="submit">Submit</button>
+        </div>
+
+        <p class="mt-5 mb-3 text-muted text-center">
+          Final project of IF4092 Tugas Akhir II, created by
+          <a href="https://hzntrm.wordpress.com">Faiz G. Haznitrama</a>
         </p>
-      </div>
-      
-      <div class="form-label-group">
-        <!-- <label for="input-text">Input Text:</label> -->
-        <textarea class="form-control" rows="10" id="input-text" name="input-text" placeholder="Input text here..." required autofocus></textarea>
-      </div>
 
-      <div class="text-center mb-4">
-          <button class="btn btn-lg btn-secondary" type="submit">Submit</button>
-      </div>
-
-      <p class="mt-5 mb-3 text-muted text-center">
-        Final project of IF4092 Tugas Akhir II, created by
-        <a href="https://hzntrm.wordpress.com">Faiz G. Haznitrama</a>
-      </p>
-
-    </form>
-
-    
+      </form>
 
   </body>
 </html>
