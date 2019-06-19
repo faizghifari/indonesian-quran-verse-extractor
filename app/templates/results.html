@@ -6,6 +6,8 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
+    <link href="https://fonts.googleapis.com/css?family=Amiri&display=swap" rel="stylesheet">
+
     <title>Home - Quran Verse Extractor</title>
     <style>
       html, body {
@@ -13,12 +15,16 @@
         background-color: #333333
       }
 
-      h1, h2, h3 {
+      h1, h2, h3, h4 {
         color: white
       }
 
       p {
         color: azure
+      }
+
+      .arabic {
+        font-family: 'Amiri', serif
       }
     </style>
 
@@ -27,7 +33,7 @@
 
   <body class="text-center">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-      <header class="masthead mb-5 mt-5">
+      <header class="masthead m-5 pb-5 border-bottom">
           <div class="text-center">
               <h1 class="cover-heading">Result</h1>
           </div>  
@@ -35,20 +41,22 @@
 
       <main role="main" class="inner cover">
         {% for i in range(0, len) %}
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mb-5">
             <div class="col-sm-10 text-center">
                 <div class="inner">
-                    <h2 class="cover-heading text-center mb-5">{{ answers[i] }}</h2>
+                    <h2 class="cover-heading text-center text-capitalize mb-5 px-5">{{ answers[i] }}</h2>
                     {% for j in range(0, count_ayah[i]) %}
-                    <h3 class="cover-heading text-center">{{ ar_results[i][j] }}</h3>
-                    <p class="lead mb-5 mx-5">
+                    <h4 class="cover-heading text-center arabic">{{ ar_results[i][j] }}</h4>
+                    <p class="lead mb-5 mx-5 px-5 font-italic">
                         {{ en_results[i][j] }}
                         <!-- <br>
                         {{ id_results }} -->
                     </p>
                     {% endfor %}
+                    <div class="col border-bottom"></div>
                 </div>
             </div>
+
         </div>
         {% endfor %}
 
