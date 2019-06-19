@@ -68,8 +68,8 @@ def results():
             id_temp = []
             ar_temp = []
             en_temp = []
+            count_ayah.append(len(verse_results[i]))
             for verse in verse_results[i]:
-                count_ayah.append(len(verse_results[i]))
                 surah = verse.split('|')[0]
                 ayah = verse.split('|')[1]
                 for id_text in id_quran['surah|ayah|text']:

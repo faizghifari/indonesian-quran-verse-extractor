@@ -35,29 +35,31 @@
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
       <header class="masthead m-5 pb-5 border-bottom">
           <div class="text-center">
-              <h1 class="cover-heading">Result</h1>
+              <h1 class="cover-heading">Results</h1>
           </div>  
       </header>
 
       <main role="main" class="inner cover">
-        {% for i in range(0, len) %}
-        <div class="row justify-content-center mb-5">
-            <div class="col-sm-10 text-center">
-                <div class="inner">
-                    <h2 class="cover-heading text-center text-capitalize mb-5 px-5">{{ answers[i] }}</h2>
-                    {% for j in range(0, count_ayah[i]) %}
-                    <h4 class="cover-heading text-center arabic">{{ ar_results[i][j] }}</h4>
-                    <p class="lead mb-5 mx-5 px-5 font-italic">
-                        {{ en_results[i][j] }}
-                        <!-- <br>
-                        {{ id_results }} -->
-                    </p>
-                    {% endfor %}
-                    <div class="col border-bottom"></div>
-                </div>
-            </div>
 
+        {% for i in range(0, len) %}
+        <div class="row justify-content-center">
+            <div class="col-sm-10 text-center">
+                <h2 class="cover-heading text-center text-capitalize mb-5 px-5">{{ answers[i] }}</h2>
+            </div>
         </div>
+
+        {% for j in range(0, count_ayah[i]) %}
+        <div class="row justify-content-center pb-5">
+            <div class="col-sm-10 text-center">
+                <h4 class="cover-heading text-center arabic">{{ ar_results[i][j] }}</h4>
+                <p class="lead mb-5 mx-5 px-5 font-italic">
+                    {{ en_results[i][j] }}
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+                    
+        <div class="row border-bottom mb-5"></div>
         {% endfor %}
 
         {% if (len == 0) %}
