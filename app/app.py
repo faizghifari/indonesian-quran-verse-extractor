@@ -52,7 +52,7 @@ def results():
         results = np.array(svm.predict(vectorizer.transform(input_text)))
 
         answers = []
-        # verse_results = []
+        
 
         for result in results:
             idx = 0
@@ -78,10 +78,16 @@ def results():
         res_unsorted = cosine_similarity(answers_vector, tfidf_verse_matrix)
 
         res_sorted = sorted(range(len(res_unsorted[0])), key=lambda k: res_unsorted[0][k], reverse = True)
+
+        verse_results = []
+
+        for i in range(0, amount_ayah):
+            ar_txt = ar_quran.loc[ res_sorted[i], : ]['surah|ayah|text'].split('|')[-1]
+            en_txt = en_quran.loc[ res_sorted[i], : ]['Text']
+
+            verse_results.append([id_quran.loc[ res_sorted[i] , : ]['surah'], id_quran.loc[ res_sorted[i] , : ]['ayah'],
+                                 ar_txt, id_quran.loc[ res_sorted[i] , : ]['text'], en_txt])
         
-        # id_results = []
-        # ar_results = []
-        # en_results = []
         # count_ayah = []
 
         # for i in range(0,len(verse_results)):
@@ -113,7 +119,7 @@ def results():
         # ans_length = len(answers)
 
         return render_template('results.html', input_text=input_text, answers=answers,
-                                amount_ayah = amount_ayah)
+                                amount_ayah = amount_ayah, verse_results=verse_results)
     else:
         return redirect(url_for('error'))
 
