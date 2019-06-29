@@ -43,7 +43,9 @@ def results():
     if request.method == 'POST':
         form = request.form
         input_text = pd.Series([form['input-text']])
-        amount_ayah = form['amount-ayah']
+        amount_ayah = int(form['amount-ayah'])
+
+        print(amount_ayah)
 
         input_text = input_text.apply(lambda x: text_cleaner.transform(x))
         input_text = input_text.apply(lambda x: sw_elim.transform(x))
@@ -87,6 +89,8 @@ def results():
 
             verse_results.append([id_quran.loc[ res_sorted[i] , : ]['surah'], id_quran.loc[ res_sorted[i] , : ]['ayah'],
                                  ar_txt, id_quran.loc[ res_sorted[i] , : ]['text'], en_txt])
+        
+        print(verse_results)
         
         # count_ayah = []
 
