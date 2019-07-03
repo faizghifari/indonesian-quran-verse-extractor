@@ -45,8 +45,6 @@ def results():
         input_text = pd.Series([form['input-text']])
         amount_ayah = int(form['amount-ayah'])
 
-        print(amount_ayah)
-
         input_text = input_text.apply(lambda x: text_cleaner.transform(x))
         input_text = input_text.apply(lambda x: sw_elim.transform(x))
         input_text = input_text.apply(lambda x: stemmer.stem(x))
@@ -69,6 +67,8 @@ def results():
         #     temp = quran_dict[answer]
         #     verse_results.append(temp)
 
+        answers_txt = ' '.join(answers)
+
         answers = pd.Series([' '.join(answers)])
 
         answers = answers.apply(lambda x: text_cleaner.transform(x))
@@ -86,11 +86,14 @@ def results():
         for i in range(0, amount_ayah):
             ar_txt = ar_quran.loc[ res_sorted[i], : ]['surah|ayah|text'].split('|')[-1]
             en_txt = en_quran.loc[ res_sorted[i], : ]['Text']
+            id_txt = id_quran.loc[ res_sorted[i] , : ]['text']
 
-            verse_results.append([id_quran.loc[ res_sorted[i] , : ]['surah'], id_quran.loc[ res_sorted[i] , : ]['ayah'],
-                                 ar_txt, id_quran.loc[ res_sorted[i] , : ]['text'], en_txt])
-        
-        print(verse_results)
+            surah_idx = id_quran.loc[ res_sorted[i] , : ]['surah']
+            surah_name = surah_dict.get(str(surah_idx))
+
+            ayah_idx = id_quran.loc[ res_sorted[i] , : ]['ayah']
+
+            verse_results.append([surah_idx, surah_name, ayah_idx, ar_txt, en_txt, id_txt])
         
         # count_ayah = []
 
@@ -122,8 +125,8 @@ def results():
 
         # ans_length = len(answers)
 
-        return render_template('results.html', input_text=input_text, answers=answers,
-                                amount_ayah = amount_ayah, verse_results=verse_results)
+        return render_template('results.html', input_text=input_text, answers=answers, answers_txt=answers_txt,
+                                amount_ayah=amount_ayah, verse_results=verse_results)
     else:
         return redirect(url_for('error'))
 

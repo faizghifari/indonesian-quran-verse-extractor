@@ -19,7 +19,7 @@
         color: white
       }
 
-      p {
+      p, a {
         color: azure
       }
 
@@ -35,7 +35,8 @@
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
       <header class="masthead m-5 pb-5 border-bottom">
           <div class="text-center">
-              <h1 class="cover-heading">Results</h1>
+              <h1 class="cover-heading">Extracted Topics</h1>
+              <h4 class="lead mt-3">"{{ answers_txt }}"</h4>
           </div>  
       </header>
 
@@ -47,12 +48,22 @@
             </div>
         </div> -->
 
+        <div class="row justify-content-center mb-5">
+          <div class="col-sm-10 text-center">
+            <h1 class="cover-heading text-center">Retrieval Results</h1>
+          </div>
+        </div>
+
         {% for i in range(0, amount_ayah) %}
         <div class="row justify-content-center pb-5">
             <div class="col-sm-10 text-center">
-                <h4 class="cover-heading text-center arabic">{{ verse_results[i][2] }}</h4>
+                <h4 class="cover-heading text-center arabic">{{ verse_results[i][3] }}</h4>
                 <p class="lead mb-5 mx-5 px-5 font-italic">
-                    {{ verse_results[i][3] }}
+                    {{ verse_results[i][5] }}
+                    <br>
+                    <a href="https://quran.com/{{ verse_results[i][0] }}/{{ verse_results[i][2] }}?translations=33">
+                      QS.{{ verse_results[i][1] }}[{{ verse_results[i][0] }}]:{{ verse_results[i][2] }}
+                    </a>
                 </p>
             </div>
         </div>
