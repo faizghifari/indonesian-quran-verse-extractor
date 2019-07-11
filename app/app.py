@@ -18,7 +18,7 @@ vectorizer = pickle.load(open('pkl/vectorizer.pkl', 'rb'))
 tfidf_vectorizer = pickle.load(open('pkl/tfidf_vectorizer.pkl', 'rb'))
 tfidf_verse_matrix = pickle.load(open('pkl/tfidf_verse_matrix.pkl', 'rb'))
 
-svm = pickle.load(open('pkl/svm.pkl', 'rb'))
+tree = pickle.load(open('pkl/tree.pkl', 'rb'))
 wordsim = pickle.load(open('pkl/wordsim.pkl', 'rb'))
 
 id_quran = pd.read_csv('../quran/Indonesian_clean.csv')
@@ -49,7 +49,7 @@ def results():
         input_text = input_text.apply(lambda x: sw_elim.transform(x))
         input_text = input_text.apply(lambda x: stemmer.stem(x))
 
-        results = np.array(svm.predict(vectorizer.transform(input_text)))
+        results = np.array(tree.predict(vectorizer.transform(input_text)))
 
         answers = []
         
@@ -81,6 +81,9 @@ def results():
 
         res_sorted = sorted(range(len(res_unsorted[0])), key=lambda k: res_unsorted[0][k], reverse = True)
 
+        # print(res_unsorted[0][3876])
+
+        similarity_score = []
         verse_results = []
 
         for i in range(0, amount_ayah):
@@ -92,6 +95,8 @@ def results():
             surah_name = surah_dict.get(str(surah_idx))
 
             ayah_idx = id_quran.loc[ res_sorted[i] , : ]['ayah']
+
+            similarity_score.append(res_unsorted[0][res_sorted[i]])
 
             verse_results.append([surah_idx, surah_name, ayah_idx, ar_txt, en_txt, id_txt])
         
@@ -126,7 +131,7 @@ def results():
         # ans_length = len(answers)
 
         return render_template('results.html', input_text=input_text, answers=answers, answers_txt=answers_txt,
-                                amount_ayah=amount_ayah, verse_results=verse_results)
+                                amount_ayah=amount_ayah, verse_results=verse_results, similarity_score=similarity_score)
     else:
         return redirect(url_for('error'))
 
