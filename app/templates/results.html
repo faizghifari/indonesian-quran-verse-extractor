@@ -36,7 +36,9 @@
       <header class="masthead m-5 pb-5 border-bottom">
           <div class="text-center">
               <h1 class="cover-heading">Extracted Topics</h1>
+              {% if (method == 'multilabel') %}
               <h4 class="lead mt-3">"{{ answers_txt }}"</h4>
+              {% endif %}
           </div>  
       </header>
 

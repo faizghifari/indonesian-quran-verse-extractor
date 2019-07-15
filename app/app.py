@@ -44,33 +44,42 @@ def results():
         form = request.form
         input_text = pd.Series([form['input-text']])
         amount_ayah = int(form['amount-ayah'])
+        method = form['optradio']
 
         input_text = input_text.apply(lambda x: text_cleaner.transform(x))
         input_text = input_text.apply(lambda x: sw_elim.transform(x))
         input_text = input_text.apply(lambda x: stemmer.stem(x))
 
-        results = np.array(tree.predict(vectorizer.transform(input_text)))
+        # print(input_text)
+        # print(method)
 
         answers = []
+        answers_txt = ''
+
+        if (method == 'multilabel'):
+            results = np.array(tree.predict(vectorizer.transform(input_text)))
+
+            for result in results:
+                idx = 0
+                for label in result:
+                    if label == 1:
+                        for name, key in target_dict.items():
+                            if key == idx:
+                                answers.append(name)
+                    idx = idx + 1
+
+            # for answer in answers:
+            #     temp = quran_dict[answer]
+            #     verse_results.append(temp)
+
+            answers_txt = ' '.join(answers)
+
+            answers = pd.Series([answers_txt])
+        else:
+            answers_txt = str(input_text)
+
+            answers = pd.Series([answers_txt])
         
-
-        for result in results:
-            idx = 0
-            for label in result:
-                if label == 1:
-                    for name, key in target_dict.items():
-                        if key == idx:
-                            answers.append(name)
-                idx = idx + 1
-
-        # for answer in answers:
-        #     temp = quran_dict[answer]
-        #     verse_results.append(temp)
-
-        answers_txt = ' '.join(answers)
-
-        answers = pd.Series([' '.join(answers)])
-
         answers = answers.apply(lambda x: text_cleaner.transform(x))
         answers = answers.apply(lambda x: sw_elim.transform(x))
         answers = answers.apply(lambda x: stemmer.stem(x))
@@ -130,8 +139,8 @@ def results():
 
         # ans_length = len(answers)
 
-        return render_template('results.html', input_text=input_text, answers=answers, answers_txt=answers_txt,
-                                amount_ayah=amount_ayah, verse_results=verse_results, similarity_score=similarity_score)
+        return render_template('results.html', input_text=input_text, answers=answers, answers_txt=answers_txt, method=method,
+                                               amount_ayah=amount_ayah, verse_results=verse_results, similarity_score=similarity_score)
     else:
         return redirect(url_for('error'))
 
