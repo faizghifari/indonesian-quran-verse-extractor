@@ -12,7 +12,7 @@ from app.lib.dict import load_dict
 
 app = Flask(__name__)
 
-target_dict, quran_dict, surah_dict = load_dict()
+target_dict, surah_dict = load_dict()
 
 vectorizer = pickle.load(open('pkl/vectorizer.pkl', 'rb'))
 tfidf_vectorizer = pickle.load(open('pkl/tfidf_vectorizer.pkl', 'rb'))
