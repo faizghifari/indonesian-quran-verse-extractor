@@ -1,297 +1,318 @@
 def load_dict():
     target_dict = {
-        'fenomena cuaca' : 0, # x
-        'bahasa' : 1,
-        'atribut fisik' : 2, # x
-        'zat fisik' : 3, # x
-        'artefak' : 4, # x
-        'ciptaan yang hidup' : 5, # x
-        'kitab suci' : 6, # y
-        'allah' : 7,
-        'singgasana allah' : 8,
-        'tuhan palsu' : 9, # x
-        'agama' : 10, # y
-        'benda astronomi' : 11, # x
-        'peristiwa' : 12, # x
-        'lokasi' : 13, # x
-        'petir' : 14,
-        'guntur' : 15,
-        'hujan' : 16,
-        'awan' : 17,
-        'arab' : 18,
-        'warna' : 19,
-        'hijau' : 20, # merah, biru, hitam, putih
-        'logam' : 21, # x
-        'mineral' : 22, # x
-        'minyak' : 23,
-        'karang' : 24,
-        'tanah' : 25,
-        'mutiara' : 26,
-        'kaca' : 27,
-        'debu' : 28,
-        'sutra' : 29,
-        'tanah liat' : 30,
-        'besi' : 31,
-        'emas' : 32,
-        'perak' : 33,
-        'kuningan' : 34,
-        'permata' : 35,
-        'tempat ibadah' : 36, # x
-        'persenjataan' : 37, # senjata
-        'koin' : 38,
-        'tinta' : 39,
-        'pena' : 40,
-        'tabut' : 41,
-        'perahu' : 42,
-        'kapal' : 43,
-        'lampu' : 44,
-        'kunci' : 45,
-        'tangga' : 46,
-        'bahtera' : 47,
-        'masjid' : 48,
-        'gereja' : 49,
-        'biara' : 50,
-        'sinagog' : 51,
-        'masjidil haram' : 52,
-        'masjidil aqsa' : 53,
-        'kabah' : 54,
-        'pisau' : 55,
-        'panah' : 56,
-        'baju besi' : 57,
-        'objek organik' : 58,  # x
-        'makhluk hidup' : 59, # x
-        'bagian tubuh' : 60, # tubuh, badan
-        'penyakit' : 61, # y
-        'makanan' : 62, # y
-        'organisme biologis' : 63, # x
-        'embrio' : 64,
-        'darah' : 65,
-        'tulang' : 66,
-        'telinga' : 67,
-        'mata' : 68,
-        'jari' : 69,
-        'dahi' : 70,
-        'gombak' : 71,
-        'jantung' : 72,
-        'tumit' : 73,
-        'usus' : 74,
-        'bibir' : 75,
-        'hidung' : 76,
-        'lidah' : 77,
-        'sayap' : 78,
-        'tulang rusuk' : 79,
-        'kusta' : 80,
-        'daging' : 81,
-        'madu' : 82,
-        'susu' : 83,
-        'garam' : 84,
-        'roti' : 85,
-        'wine' : 86, # khamar
-        'gandum' : 87,
-        'daging babi' : 88,
-        'bangkai' : 89,
-        'serangga' : 90, # x
-        'burung' : 91,
-        'tanaman' : 92, # y
-        'binatang' : 93, # y
-        'ikan' : 94,
-        'belalang' : 95, 
-        'lebah' : 96,
-        'laba-laba' : 97, # laba laba
-        'semut' : 98, # + kutu, after this
-        'nyamuk' : 99,
-        'lalat' : 100,
-        'gagak' : 101, # burung gagak (add)
-        'puyuh' : 102, # salwa, burung puyuh (add)
-        'hud-hud' : 103, # hud hud
-        'timun' : 104, # mentimun
-        'kurma' : 105, 
-        'ara' : 106, # tin
-        'bawang putih' : 107,
-        'jahe' : 108,
-        'anggur' : 109,
-        'herba' : 110, # sayur
-        'daun' : 111, # kelopak, mayang
-        'kacang' : 112,
-        'zaitun' : 113,
-        'bawang' : 114, # bawang merah
-        'lentil' : 115, # kacang adas
-        'pohon' : 116,
-        'delima' : 117,
-        'unta' : 118,
-        'sapi' : 119,
-        'babi' : 120,
-        'kambing' : 121,
-        'kuda' : 122,
-        'singa' : 123,
-        'keledai' : 124, # baghal, bagal
-        'kera' : 125,
-        'serigala' : 126,
-        'katak' : 127,
-        'domba' : 128,
-        'ular' : 129,
-        'anjing' : 130,
-        'malaikat' : 131, # y
-        'jin' : 132,
-        'manusia' : 133, # y
-        'daabbah' : 134, # binatang melata
-        'jibril' : 135,
-        'malaikat maut' : 136,
-        'harut' : 137,
-        'marut' : 138,
-        'malik' : 139,
-        'mikail' : 140,
-        'setan' : 141, # syaitan
-        'iblis' : 142,
-        'raja' : 143,
-        'anak adam' : 144, # anak anak adam, etc
-        'orang bersejarah' : 145, # x
-        'orang-orang bersejarah' : 146, # x
-        'nabi' : 147, # y
-        'firaun' : 148,
-        'uzair' : 149,
-        'luqman' : 150,
-        'jalut' : 151,
-        'dzulkifli' : 152, # zulkifli
-        'samiri' : 153,
-        'talut' : 154, # thalut
-        'qarun' : 155, # karun
-        'dzulkarnain' : 156, 
-        'haman' : 157,
-        'aad' : 158, #  Aad
-        'tsamud' : 159,
-        'madyan' : 160, 
-        'quraisy' : 161,
-        'romawi' : 162, 
-        'anshar' : 163,
-        'arab badui' : 164, # badui
-        'tubba' : 165,
-        'bani israil' : 166,
-        'yajuj dan majuj' : 167, # yajuj majuj pisah
-        'pemuda kahfi' : 168, # orang-orang yang mendiami gua
-        'tentara bergajah' : 169,
-        'pembuat parit' : 170, # orang-orang yang membuat parit
-        'penduduk rass' : 171, 
-        'penduduk aikah' : 172,
-        'penduduk al-hijr' : 173, # al hijr, penduduk-penduduk kota al hijr
-        'abu lahab' : 174,
-        'ummu jamil' : 175, # x
-        'rasul' : 176, # y
-        'zakaria' : 177, 
-        'yahya' : 178,
-        'harun' : 179,
-        'idris' : 180,
-        'ilyasa' : 181,
-        'ayyub' : 182,
-        'adam' : 183,
-        'daud' : 184,
-        'sulaiman' : 185,
-        'yusuf' : 186,
-        'yaqub' : 187,
-        'ishaq' : 188,
-        'habil' : 189,
-        'qabil' : 190,
-        'israil' : 191,
-        'azar' : 192, # Aazar
-        'muhammad' : 193,
-        'isa' : 194,
-        'ibrahim' : 195,
-        'ismail' : 196,
-        'salih' : 197,  # shaleh
-        'hud' : 198,
-        'syuaib' : 199,
-        'yunus' : 200,
-        'musa' : 201,
-        'nuh' : 202,
-        'luth' : 203,
-        'ilyas' : 204,
-        'ahmad' : 205,
-        'zaid' : 206,
-        'maryam' : 207, 
-        'messiah' : 208, # al masih
-        'quran' : 209, # al quran
-        'injil' : 210,
-        'zabur' : 211,
-        'taurat' : 212,
-        'islam' : 213,
-        'kristen' : 214, # nasrani
-        'yahudi' : 215,
-        'shabiin' : 216, 
-        'majusi' : 217,
-        'bulan' : 218,
-        'bumi' : 219,
-        'matahari' : 220,
-        'bintang' : 221,
-        'sirius' : 222, # syira
-        'gugus bintang' : 223, # gugusan bintang
-        'uzza' : 224, # al uzza
-        'manat' : 225, 
-        'latta' : 226, # al lata
-        'suwa' : 227, # suwwa
-        'baal' : 228,
-        'nasr' : 229,
-        'wadd' : 230,
-        'yaghuts' : 231,
-        'yauq' : 232,
-        'sesembahan' : 233, # berhala
-        'anak lembu emas' : 234, # lembu
-        'peristiwa bersejarah' : 235, # x
-        'peristiwa kalender' : 236, # x
-        'peristiwa fisik' : 237, # x
-        'peristiwa akhirat' : 238, # akhirat
-        'masa jahiliyah' : 239, # jahiliyah
-        'hari jumat' : 240, # jumat
-        'hari sabtu' : 241, # sabtu
-        'haji' : 242, 
-        'umrah' : 243,
-        'lailatul qadar' : 244, # malam kemuliaan
-        'bulan ramadhan' : 245, # ramadhan
-        'fajar' : 246,
-        'hari kebangkitan' : 247, # kebangkitan
-        'hari kiamat' : 248,
-        'lokasi di akhirat' : 249, # x
-        'lokasi geografis' : 250, # x
-        'surga' : 251,
-        'neraka' : 252,
-        'firdaus' : 253,
-        'adn' : 254,
-        'pohon bidara' : 255,
-        'salsabil' : 256,
-        'sijjin' : 257,
-        'saqar' : 258,
-        'zaqqum' : 259,
-        'ladha' : 260, # api yang bergejolak (?)
-        'ufuk' : 261,
-        'kiblat' : 262,
-        'gurun' : 263, # dusun
-        'kota' : 264, # y
-        'gunung' : 265, # y
-        'tempat bersejarah' : 266, # x
-        'badar' : 267,
-        'mekkah' : 268, # mekah, baitullah
-        'madinah' : 269,
-        'babilonia' : 270, # babil
-        'hunain' : 271,
-        'iram' : 272,
-        'yastrib' : 273,
-        'shafa' : 274,
-        'marwah' : 275, # marwa
-        'arafat' : 276, # arafah
-        'sinai' : 277, 
-        'judiy' : 278, # judi, bukit judi
-        'mesir' : 279,
-        'saba' : 280,
-        'al-ahqaf' : 281 # al ahqaf
-        # 'kutu' : 282
-        # 'imran' : 283
-        # angin, kebun
-        # keluarga, ayah, ibu, bapak, anak, yatim, saudara, budak, laki, perempuan
-        # harta, niaga, jual beli, hutang, riba, dagang
-        # ibadah, shalat, puasa, zakat, sedekah
-        # negara, bangsa, hukum, adil
-        # kisah, hikmah, ilmu
-        # perang
+        'bahasa' : 0,
+        'kitab' : 1,
+        'allah' : 2,
+        'arsy' : 3,
+        'agama' : 4,
+        'petir' : 5,
+        'guntur' : 6,
+        'hujan' : 7,
+        'awan' : 8,
+        'angin' : 9,
+        'arab' : 10,
+        'warna' : 11,
+        'hijau' : 12, 
+        'merah' : 13,
+        'biru' : 14,
+        'hitam' : 15,
+        'putih' : 16,
+        'minyak' : 17,
+        'karang' : 18,
+        'tanah' : 19,
+        'mutiara' : 20,
+        'kaca' : 21,
+        'debu' : 22,
+        'sutra' : 23,
+        'tanah liat' : 24,
+        'besi' : 25,
+        'emas' : 26,
+        'perak' : 27,
+        'kuningan' : 28, #
+        'permata' : 29,
+        'senjata' : 30,
+        'dirham' : 31,
+        'tinta' : 32,
+        'pena' : 33,
+        'tabut' : 34,
+        'perahu' : 35,
+        'kapal' : 36,
+        'lampu' : 37,
+        'kunci' : 38,
+        'tangga' : 39,
+        'bahtera' : 40,
+        'masjid' : 41,
+        'gereja' : 42,
+        'biara' : 43, #
+        'masjidil haram' : 44, #
+        'masjidil aqsha' : 45, #
+        'kabah' : 46, #
+        'pisau' : 47,
+        'panah' : 48,
+        'baju besi' : 49,
+        'tubuh' : 50,
+        'badan' : 51,
+        'penyakit' : 52,
+        'sakit' : 53,
+        'makanan' : 54,
+        'janin' : 55,
+        'darah' : 56,
+        'tulang' : 57,
+        'telinga' : 58,
+        'mata' : 59,
+        'jari' : 60,
+        'dahi' : 61,
+        'ubun ubun' : 62, #
+        'jantung' : 63, #
+        'hati' : 64, #
+        'dada' : 65, #
+        'punggung' : 66, #
+        'tangan' : 67, #
+        'kaki' : 68, #
+        'perut' : 69, #
+        'lambung' : 70, #
+        'rambut' : 71, #
+        'kulit' : 72, #
+        'leher' : 73, #
+        'dagu' : 74, #
+        'tumit' : 75, #
+        'usus' : 76, #
+        'bibir' : 77, #
+        'hidung' : 78, #
+        'lidah' : 79, #
+        'sayap' : 80, #
+        'rusuk' : 81, #
+        'kusta' : 82, #
+        'daging' : 83, #
+        'madu' : 84, #
+        'susu' : 85, #
+        'garam' : 86, #
+        'roti' : 87, #
+        'khamar' : 88, #
+        'gandum' : 89, #
+        'daging babi' : 90, #
+        'bangkai' : 91, #
+        'burung' : 92, #
+        'tanaman' : 93, 
+        'binatang' : 94,
+        'ikan' : 95,
+        'belalang' : 96, 
+        'lebah' : 97, #
+        'laba laba' : 98, #
+        'semut' : 99,
+        'kutu' : 100, #
+        'nyamuk' : 101, #
+        'lalat' : 102, #
+        'gagak' : 103, #
+        'salwa' : 104, #
+        'hud hud' : 105, 
+        'kebun' : 106,
+        'mentimun' : 107, #
+        'kurma' : 108, #
+        'tin' : 109, #
+        'jahe' : 110, #
+        'anggur' : 111, #
+        'sayur' : 112, #
+        'daun' : 113, #
+        'kelopak' : 114, #
+        'mayang': 115, #
+        'zaitun' : 116, #
+        'bawang' : 117,
+        'kacang' : 118, #
+        'pohon' : 119,
+        'delima' : 120, #
+        'unta' : 121,
+        'sapi' : 122,
+        'babi' : 123, #
+        'kambing' : 124,
+        'kuda' : 125,
+        'singa' : 126, #
+        'keledai' : 127, #
+        'bagal' : 128, #
+        'kera' : 129, #
+        'serigala' : 130, #
+        'katak' : 131, #
+        'domba' : 132, #
+        'ular' : 133, #
+        'anjing' : 134, #
+        'malaikat' : 135,
+        'jin' : 136,
+        'manusia' : 137,
+        'binatang melata' : 138, # 
+        'jibril' : 139,
+        'malaikat maut' : 140,
+        'harut' : 141,
+        'marut' : 142,
+        'malik' : 143, 
+        'mikail' : 144,
+        'syaitan' : 145,
+        'iblis' : 146,
+        'raja' : 147,
+        'anak adam' : 148,
+        'nabi' : 149, 
+        'firaun' : 150,
+        'uzair' : 151,
+        'luqman' : 152,
+        'jalut' : 152,
+        'dzulkifli' : 153,
+        'samiri' : 154,
+        'thalut' : 155,
+        'karun' : 156,
+        'dzulkarnain' : 157,
+        'haman' : 158,
+        'aad' : 159,
+        'tsamud' : 160,
+        'madyan' : 161,
+        'quraisy' : 162,
+        'romawi' : 163, 
+        'anshar' : 164,
+        'badui' : 165, 
+        'tubba' : 166,
+        'bani israil' : 167,
+        'yajuj' : 168,
+        'majuj' : 169,
+        'orang yang mendiami gua' : 170,
+        'tentara bergajah' : 171,
+        'orang yang membuat parit' : 172,
+        'penduduk rass' : 173,
+        'penduduk aikah' : 174,
+        'al hijr' : 175, 
+        'abu lahab' : 176,
+        'rasul' : 177,
+        'zakaria' : 178,
+        'yahya' : 179, 
+        'harun' : 180,
+        'idris' : 181,
+        'ilyasa' : 182,
+        'ayyub' : 183,
+        'adam' : 184,
+        'daud' : 185, 
+        'sulaiman' : 186,
+        'yusuf' : 187,
+        'yaqub' : 188,
+        'ishaq' : 189,
+        'habil' : 190,
+        'qabil' : 191,
+        'israil' : 192,
+        'aazar' : 193,
+        'muhammad' : 194,
+        'isa' : 195,
+        'ibrahim' : 196,
+        'ismail' : 197,
+        'shaleh' : 198,
+        'hud' : 199,
+        'syuaib' : 200,
+        'yunus' : 201,
+        'musa' : 202,
+        'nuh' : 203,
+        'luth' : 204,
+        'ilyas' : 205,
+        'ahmad' : 206,
+        'zaid' : 207,
+        'maryam' : 208,
+        'al masih' : 209,
+        'quran' : 210,
+        'injil' : 211,  
+        'zabur' : 212,
+        'taurat' : 213,
+        'islam' : 214,
+        'nasrani' : 215,
+        'yahudi' : 216,
+        'shabiin' : 217,
+        'majusi' : 218,
+        'bulan' : 219,
+        'bumi' : 220,
+        'matahari' : 221, #
+        'bintang' : 222,
+        'syira' : 223, #
+        'gugusan bintang' : 224,
+        'al uzza' : 225, #
+        'manat' : 226, #
+        'al lata' : 227,
+        'suwwa' : 228, #
+        'baal' : 229, #
+        'nasr' : 230, #
+        'wadd' : 231, #
+        'yaghuts' : 232, #
+        'yauq' : 233, #
+        'berhala' : 234,
+        'lembu' : 235, #
+        'akhirat' : 236,
+        'jahiliyah' : 237, #
+        'jumat' : 238,
+        'sabtu' : 239,
+        'haji' : 240,
+        'umrah' : 241,
+        'malam kemuliaan' : 242, #
+        'ramadhan' : 243, 
+        'fajar' : 244, #
+        'kebangkitan' : 245,
+        'hari kiamat' : 246,
+        'surga' : 247,
+        'neraka' : 248,
+        'firdaus' : 249,
+        'adn' : 250,
+        'pohon bidara' : 251,
+        'salsabil' : 252,
+        'sijjin' : 253,
+        'saqar' : 254,
+        'zaqqum' : 255,
+        'api yang bergejolak' : 257, #
+        'ufuk' : 258, #
+        'kiblat' : 259,
+        'dusun' : 260, #
+        'kota' : 261,
+        'gunung' : 262,
+        'badar' : 263,
+        'mekah' : 264,
+        'baitullah' : 265, #
+        'madinah' : 267, #
+        'babil' : 268,
+        'hunain' : 269,
+        'iram' : 270,
+        'yastrib' : 271, #
+        'shafa' : 272, 
+        'marwa' : 273, 
+        'arafah' : 274,
+        'sinai' : 275, 
+        'bukit judi' : 276,
+        'mesir' : 277,
+        'saba' : 278,
+        'al ahqaf' : 279,
+        'imran' : 280,
+        'keluarga' : 281, # --------
+        'ayah' : 282,
+        'ibu' : 283,
+        'bapak' : 284,
+        'anak' : 285,
+        'yatim' : 286,
+        'saudara' : 287,
+        'budak' : 288,
+        'laki' : 289,
+        'perempuan' : 290,
+        'harta' : 291,
+        'niaga' : 292,
+        'jual beli' : 293,
+        'hutang' : 294,
+        'riba' : 295,
+        'dagang' : 296,
+        'ibadah' : 297,
+        'shalat' : 298,
+        'puasa' : 299,
+        'zakat' : 300,
+        'sedekah' : 301,
+        'negara' : 302,
+        'bangsa' : 303,
+        'hukum' : 304,
+        'adil' : 305,
+        'kisah' : 306,
+        'hikmah' : 307,
+        'ilmu' : 308,
+        'perang' : 309,
+        'zalim' : 310
     }
+
+    # 'bahasa','kitab','allah','arsy','agama','petir','guntur','hujan','awan','angin','arab','warna','hijau','merah','biru','hitam','putih','minyak','karang', 'tanah','mutiara','kaca','debu','sutra','tanah liat','besi','emas','perak','kuningan','permata','senjata','dirham','tinta','pena','tabut','perahu','kapal','lampu','kunci','tangga','bahtera','masjid','gereja','biara','masjidil haram','masjidil aqsha','kabah','pisau','panah','baju besi','tubuh','badan','penyakit','sakit','makanan','janin','darah','tulang','telinga','mata','jari','dahi','ubun ubun','jantung','hati','dada','punggung','tangan','kaki','perut','lambung','rambut','kulit','leher','dagu','tumit','usus','bibir','hidung', 'lidah','sayap','rusuk','kusta','daging','madu','susu','garam','roti','khamar','gandum','daging babi','bangkai','burung','tanaman','binatang','ikan','belalang','lebah','laba laba','semut','kutu','nyamuk','lalat','gagak','salwa','hud hud','kebun','mentimun','kurma','tin','jahe','anggur','sayur','daun','kelopak','mayang','zaitun','bawang','kacang','pohon','delima','unta','sapi','babi','kambing','kuda','singa','keledai','bagal','kera','serigala','katak','domba','ular','anjing','malaikat','jin','manusia','binatang melata','jibril','malaikat maut','harut','marut','malik','mikail','syaitan','iblis','raja','anak adam','nabi','firaun','uzair','luqman','jalut','zulkifli','samiri','thalut','karun','dzulkarnain','haman','aad','tsamud','madyan', 'quraisy','romawi','anshar','badui','tubba','bani israil','yajuj','majuj','orang yang mendiami gua','tentara bergajah','orang yang membuat parit','penduduk rass','penduduk aikah','al hijr','abu lahab','rasul','zakaria','yahya','harun','idris','ilyasa','ayyub','adam','daud','sulaiman','yusuf','yaqub','ishaq','habil','qabil','israil','aazar','muhammad','isa','ibrahim','ismail','shaleh','hud','syuaib','yunus','musa','nuh','luth','ilyas','ahmad','zaid','maryam','al masih','quran','injil','zabur','taurat','islam','nasrani','yahudi','shabiin','majusi','bulan','bumi','matahari','bintang','syira','gugusan bintang','al uzza','manat','al lata','suwwa','baal','nasr','wadd','yaghuts','yauq','berhala','lembu','akhirat','jahiliyah','jumat','sabtu','haji', 'umrah','malam kemuliaan','ramadhan','fajar','kebangkitan','hari kiamat','surga','neraka','firdaus','adn','pohon bidara','salsabil','sijjin','saqar','zaqqum','api yang bergejolak','ufuk','kiblat','dusun','kota','gunung','badar','mekah','baitullah','madinah','babil','hunain','iram','yastrib','shafa','marwa','arafah','sinai','bukit judi','mesir','saba','al ahqaf','imran','keluarga','ayah','ibu','bapak','anak','yatim','saudara','budak','laki','perempuan','harta','niaga','jual beli','hutang','riba','dagang','ibadah','shalat','puasa','zakat','sedekah','negara','bangsa','hukum','adil','kisah','hikmah','ilmu','perang','zalim'
 
     surah_dict = {
         '1' : 'Al-Fatihah',
@@ -409,5 +430,5 @@ def load_dict():
         '113' : 'Al-Falaq',
         '114' : 'An-Nas'
     }
-
+    
     return target_dict, surah_dict
