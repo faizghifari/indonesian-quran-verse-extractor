@@ -1,9 +1,10 @@
 import flask
 import pickle
+import sqlite3 as sql
 import numpy as np
 import pandas as pd
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 from sklearn.metrics.pairwise import cosine_similarity
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from app.lib.word_similarity import WordSimilarityClassifier
@@ -11,6 +12,7 @@ from app.lib.preprocess import IndoTextCleaner, StopWordsEliminator
 from app.lib.dict import load_dict
 
 app = Flask(__name__)
+app.secret_key = "super secret key"
 
 target_dict, surah_dict = load_dict()
 
@@ -29,13 +31,22 @@ text_cleaner = IndoTextCleaner()
 sw_elim = StopWordsEliminator()
 stemmer = StemmerFactory().create_stemmer()
 
+conn = sql.connect('evaluation.db')
+conn.execute('CREATE TABLE IF NOT EXISTS evaluation (evaluator TEXT, raw_text TEXT, labels TEXT, verse_relevance INTEGER, verse_irrelevance INTEGER)')
+conn.close()
+
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html')
+    # return render_template('index.html')
+    return render_template('new_index.html')
 
-@app.route('/main')
+@app.route('/main', methods=['POST', 'GET'])
 def main():
+    if request.method == 'POST':
+        form = request.form
+        session['username'] = form['username']
+
     return render_template('main.html')
 
 @app.route('/results', methods=['POST', 'GET'])
@@ -50,9 +61,7 @@ def results():
         input_text = input_text.apply(lambda x: sw_elim.transform(x))
         input_text = input_text.apply(lambda x: stemmer.stem(x))
 
-        # print(input_text)
-        # print(method)
-
+        raw_answers = []
         answers = []
         answers_txt = ''
 
@@ -68,18 +77,14 @@ def results():
                                 answers.append(name)
                     idx = idx + 1
 
-            # for answer in answers:
-            #     temp = quran_dict[answer]
-            #     verse_results.append(temp)
-
             answers_txt = ' '.join(answers)
-
+            raw_answers = answers
             answers = pd.Series([answers_txt])
         else:
-            answers_txt = str(input_text)
+            answers_txt = input_text.values[0]
 
             answers = pd.Series([answers_txt])
-        
+
         answers = answers.apply(lambda x: text_cleaner.transform(x))
         answers = answers.apply(lambda x: sw_elim.transform(x))
         answers = answers.apply(lambda x: stemmer.stem(x))
@@ -90,10 +95,12 @@ def results():
 
         res_sorted = sorted(range(len(res_unsorted[0])), key=lambda k: res_unsorted[0][k], reverse = True)
 
-        # print(res_unsorted[0][3876])
-
         similarity_score = []
         verse_results = []
+
+        session['input_text'] = input_text.values[0]
+        session['raw_answers'] = raw_answers
+        session['amount_ayah'] = amount_ayah
 
         for i in range(0, amount_ayah):
             ar_txt = ar_quran.loc[ res_sorted[i], : ]['surah|ayah|text'].split('|')[-1]
@@ -108,41 +115,69 @@ def results():
             similarity_score.append(res_unsorted[0][res_sorted[i]])
 
             verse_results.append([surah_idx, surah_name, ayah_idx, ar_txt, en_txt, id_txt])
-        
-        # count_ayah = []
-
-        # for i in range(0,len(verse_results)):
-        #     id_temp = []
-        #     ar_temp = []
-        #     en_temp = []
-        #     count_ayah.append(len(verse_results[i]))
-        #     for verse in verse_results[i]:
-        #         surah = verse.split('|')[0]
-        #         ayah = verse.split('|')[1]
-        #         for id_text in id_quran['surah|ayah|text']:
-        #             if id_text.find(verse) != -1:
-        #                 txt_temp = id_text.split('|')[-1]
-        #                 id_temp.append(txt_temp)
-        #                 break
-        #         for ar_text in ar_quran['surah|ayah|text']:
-        #             if ar_text.find(verse) != -1:
-        #                 txt_temp = ar_text.split('|')[-1]
-        #                 ar_temp.append(txt_temp)
-        #                 break
-        #         for en_text in en_quran[['Surah','Ayah','Text']].values:
-        #             if ((en_text[0] == int(surah)) and (en_text[1] == int(ayah))):
-        #                 en_temp.append(en_text[2])
-        #                 break
-        #     id_results.append(id_temp)
-        #     ar_results.append(ar_temp)
-        #     en_results.append(en_temp)
-
-        # ans_length = len(answers)
 
         return render_template('results.html', input_text=input_text, answers=answers, answers_txt=answers_txt, method=method,
-                                               amount_ayah=amount_ayah, verse_results=verse_results, similarity_score=similarity_score)
+                                               amount_ayah=amount_ayah, verse_results=verse_results, similarity_score=similarity_score,
+                                               raw_answers=raw_answers, answers_len=len(raw_answers))
     else:
         return redirect(url_for('error'))
+
+@app.route('/evaluation', methods=['POST'])
+def evaluation():
+    if request.method == 'POST':
+        try:
+            form = request.form
+
+            username = 'Guest'
+            if 'username' in session:
+                username = session['username']
+            
+            input_text = session['input_text']
+            raw_answers = session['raw_answers']
+            amount_ayah = session['amount_ayah']
+            
+            labels = []
+            verse_relevance = 0
+            verse_irrelevance = 0
+
+            for answer in raw_answers:
+                if answer in form:
+                    temp = form[answer]
+                    temp = temp + ':' + 'relevance'
+                    labels.append(temp)
+                else:
+                    temp = answer + ':' + 'irrelevance'
+                    labels.append(temp)
+
+            for i in range(0,amount_ayah):
+                if str(i) in form:
+                    verse_relevance += 1
+
+            verse_irrelevance = amount_ayah - verse_relevance
+            labels_txt = ','.join(labels)
+
+            with sql.connect('evaluation.db') as con:
+                cur = con.cursor()
+                cur.execute('INSERT INTO evaluation (evaluator,raw_text,labels,verse_relevance,verse_irrelevance) VALUES (?,?,?,?,?)',(username,input_text,labels_txt,verse_relevance,verse_irrelevance))
+                con.commit()
+                msg = 'Record successfully added.'
+        except:
+            con.rollback()
+            msg = 'Error in insert operation.'
+        finally:
+            con.close()
+            return render_template('evaluation.html', username=username, msg=msg)
+
+@app.route('/list')
+def list():
+   con = sql.connect('evaluation.db')
+   con.row_factory = sql.Row
+   
+   cur = con.cursor()
+   cur.execute('SELECT * FROM evaluation')
+   
+   rows = cur.fetchall()
+   return render_template('list.html', rows=rows)
 
 @app.route('/error')
 def error():

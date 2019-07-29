@@ -8,7 +8,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Amiri&display=swap" rel="stylesheet">
 
-    <title>Home - Quran Verse Extractor</title>
+    <title>Results - Quran Verse Extractor</title>
     <style>
       html, body {
         height: 100%;
@@ -19,7 +19,7 @@
         color: white
       }
 
-      p, a {
+      p, a, label, input {
         color: azure
       }
 
@@ -32,14 +32,24 @@
   </head>
 
   <body class="text-center">
+
+    <form action="/evaluation" method="POST">
+    
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
       <header class="masthead m-5 pb-5 border-bottom">
+          {% if (method == 'multilabel') %}
           <div class="text-center">
               <h1 class="cover-heading">Extracted Topics</h1>
-              {% if (method == 'multilabel') %}
-              <h4 class="lead mt-3">"{{ answers_txt }}"</h4>
-              {% endif %}
-          </div>  
+                {% for i in range(0, answers_len) %}
+                <div class="form-check-inline lead">
+                  <label class="form-check-label lead">
+                    <input type="checkbox" class="form-check-input lead" name="{{ raw_answers[i] }}" id="{{ raw_answers[i] }}" value="{{ raw_answers[i] }}">{{ raw_answers[i] }}
+                  </label>
+                </div>
+                <!-- <h4 class="lead mt-3">"{{ answers_txt }}"</h4> -->
+                {% endfor %}
+          </div>
+          {% endif %}  
       </header>
 
       <main role="main" class="inner cover">
@@ -60,7 +70,7 @@
         <div class="row justify-content-center pb-5">
             <div class="col-sm-10 text-center">
                 <h4 class="cover-heading text-center arabic">{{ verse_results[i][3] }}</h4>
-                <p class="lead mb-5 mx-5 px-5 font-italic">
+                <p class="lead mx-5 px-5 font-italic">
                     {{ verse_results[i][5] }}
                     <br>
                     <a href="https://quran.com/{{ verse_results[i][0] }}/{{ verse_results[i][2] }}?translations=33">
@@ -68,6 +78,11 @@
                     </a>
                     <br>
                     {{ similarity_score[i] }}
+                    <div class="form-check-inline lead">
+                      <label class="form-check-label lead">
+                        <input type="checkbox" class="form-check-input lead" name="{{ i }}" id="{{ i }}" value="{{ i }}">Relevance
+                      </label>
+                    </div>
                 </p>
             </div>
         </div>
@@ -96,11 +111,10 @@
       <footer class="mastfoot mt-auto">
             {% if (amount_ayah != 0) %}
             <div class="row justify-content-center">
-                <p class="lead">
-                    <a href="/main" class="btn btn-lg btn-secondary">Back to Main</a>
-                </p>
+                <button class="btn btn-lg btn-secondary" type="submit">Submit Evaluation</button>
             </div>
             {% endif %}
+
             <div class="row justify-content-center">
                 <p class="mt-5 mb-3 text-muted text-center">
                     Final project of IF4092 Tugas Akhir II, created by
@@ -108,6 +122,9 @@
                 </p>
             </div>
       </footer>
-    </div>  
+    </div>
+    
+    </form>
+
   </body>
 </html>
