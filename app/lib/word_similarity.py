@@ -1,18 +1,17 @@
 import numpy as np
 
-class WordSimilarityClassifier:
 
+class WordSimilarityClassifier:
     def __init__(self, word_list):
-        self.__class__.__name__ = 'WordSimilarity'
+        self.__class__.__name__ = "WordSimilarity"
         self.word_list = word_list
 
     def _convert_input(self, x):
         x = np.asarray(x)
         if x.ndim == 0:
-            x = x[None]  # Makes x 1D
+            x = x[None]
 
         return x
-
 
     def predict(self, test):
         result = []
@@ -27,5 +26,5 @@ class WordSimilarityClassifier:
                     data_result.append(0)
 
             result.append(data_result)
-        
+
         return result
